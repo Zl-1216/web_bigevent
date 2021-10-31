@@ -29,8 +29,8 @@ function getUserInfo() {
             if (res.status !== 0) {
                 return layui.layer.msg('获取用户信息失败!')
             }
-            //调用renderAvator渲染用户的头像
-            renderAvator(res.data)
+            //调用renderAvatar渲染用户的头像
+            renderAvatar(res.data)
         },
         //不论成功还是失败最终都会调用这个complete回调函数
         // complete: function(res) {
@@ -47,18 +47,20 @@ function getUserInfo() {
     })
 }
 //渲染用户的头像
-function renderAvator(user) {
+function renderAvatar(user) {
     var name = user.nickname || user.username
     $('#welcome').html('欢迎&nbsp;&nbsp;' + name)
         //按需渲染用户的头像
     if (user.user_pic !== null) {
         //3.1渲染图片头像
         $('.layui-nav-img').attr('src', user.user_pic).show()
-        $('.text-avator').hide()
+        $('.text-avatar').hide()
+    } else {
+        //渲染文本头像
+        $('.layui-nav-img').hide()
+        var first = name[0].toUpperCase()
+        $('.text-avatar').html(first).show()
     }
-    //渲染文本头像
-    $('.layui-nav-img').hide()
-    var first = name[0].toUpperCase()
-    $('.text-avator').html(first).show()
+
 
 }
